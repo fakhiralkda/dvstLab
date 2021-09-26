@@ -1,8 +1,10 @@
+---
 kind: pipeline
-name: check
-
-steps:
-  - name: build
+name: anu
+clone:
+  depth: 1
+steps: 
+  - name: kompres
     image: debian:bullseye
     environment:
       PW:
