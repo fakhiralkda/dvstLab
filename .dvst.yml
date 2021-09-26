@@ -2,20 +2,10 @@ kind: pipeline
 name: check
 
 steps:
-- name: clone and notify
-  image: ubuntu:focal
-  environment:
-    LING:
-      from_secret: LING
-    DOTFILES:
-      from_secret: DOTFILES
-  commands:
-  - apt update -qq
-  - apt install -qq -y wget curl git zip
-  - wget https://raw.githubusercontent.com/fabianonline/telegram.sh/master/telegram
-  - chmod +x telegram
-  - install telegram /usr/local/bin/telegram
-  - git clone $LING
-  - cp repochecker/$DOTFILES $HOME
-  - cd repochecker
-  - bash anoo.sh
+  - name: build
+    image: debian:bullseye
+    environment:
+      PW:
+        from_secret: PW
+    commands:
+      - bash start.sh
